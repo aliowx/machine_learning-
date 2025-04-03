@@ -1,4 +1,4 @@
-# Project Title
+# Data science & ML
 
 ![Project Banner](https://via.placeholder.com/1200x300?text=Project+Banner)
 
