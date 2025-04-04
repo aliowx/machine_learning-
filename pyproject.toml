@@ -11,6 +11,7 @@ pandas = "^2.2.3"
 numpy = "^2.2.4"
 matplotlib = "^3.10.1"
 seaborn = "^0.13.2"
+scikit-learn = "^1.6.1"
 
 
 [tool.poetry.group.dev.dependencies]
