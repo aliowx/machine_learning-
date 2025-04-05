@@ -14,6 +14,7 @@ seaborn = "^0.13.2"
 scikit-learn = "^1.6.1"
 category-encoders = "^2.8.1"
 alembic = "^1.15.2"
+fastapi = "^0.115.12"
 
 
 [tool.poetry.group.dev.dependencies]
