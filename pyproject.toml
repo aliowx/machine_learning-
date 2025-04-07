@@ -17,6 +17,7 @@ alembic = "^1.15.2"
 fastapi = "^0.115.12"
 pydantic-settings = "^2.8.1"
 kagglehub = "^0.3.11"
+graphviz = "^0.20.3"
 
 
 [tool.poetry.group.dev.dependencies]
