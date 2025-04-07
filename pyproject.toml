@@ -20,6 +20,7 @@ kagglehub = "^0.3.11"
 graphviz = "^0.20.3"
 persiantools = "^5.2.0"
 tensorflow = "2.19.0"
+pydot = "^3.0.4"
 
 
 [tool.poetry.group.dev.dependencies]
