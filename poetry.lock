@@ -915,6 +915,31 @@ files = [
 pygments = "*"
 
 [[package]]
+name = "jalali-core"
+version = "1.0.0"
+description = "a Gregorian to Jalali and inverse date convertor"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "jalali_core-1.0.0-py3-none-any.whl", hash = "sha256:84e6f5090eadfb35234f24fad084be831d00da3c0b238ee001e8a1fd49bf7924"},
+    {file = "jalali_core-1.0.0.tar.gz", hash = "sha256:f4287c70c630323dcf0a3ab26df905ba4d451e230ac1f65b3bb2f77797894a2b"},
+]
+
+[[package]]
+name = "jdatetime"
+version = "5.2.0"
+description = "Jalali datetime binding for python"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "jdatetime-5.2.0-py3-none-any.whl", hash = "sha256:d4aa73543e4e6c0e6122b58743773168edee5efe5c5acf05d1dc8c90524ca71c"},
+    {file = "jdatetime-5.2.0.tar.gz", hash = "sha256:c81d5898717b82b609a3ce2a73f8b8d3230b0c757e5c0de9d6b1acfdc224f551"},
+]
+
+[package.dependencies]
+jalali-core = ">=1.0"
+
+[[package]]
 name = "jedi"
 version = "0.19.2"
 description = "An autocompletion tool for Python that can be used for text editors."
@@ -3161,4 +3186,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "ba055aa657874d8ea4f6a6cf76d5a97e4e75a4bc3df88d5bdccbe4ff7d3f279d"
+content-hash = "7cecc252648e8496ce495e1eb57190442df6475c0931b064675de4b089f1426f"
