@@ -23,6 +23,7 @@ tensorflow = "2.19.0"
 pydot = "^3.0.4"
 rocketry = "^2.5.1"
 jdatetime = "^5.2.0"
+torch = "^2.6.0"
 
 
 [tool.poetry.group.dev.dependencies]
