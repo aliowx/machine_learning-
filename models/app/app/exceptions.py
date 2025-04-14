@@ -81,3 +81,18 @@ async def http_exception_handler(request: Request, exc:Any):
         status_code=exc.status_code  
     )
     return response
+
+
+async def internal_exceptions_handler(request: Request, exc: Any):
+    exception_type, traceback_str, traceback_full = get_traceback_info(exc)
+    logger.error(f"Unhandled {exception_type} Exception Happened:\n{traceback_str} \n{traceback_full}")
+    
+    error_msg = ''
+    if settings.DEBUG:
+        error_msg = str(exc)
+        
+    return utils.APIErrorResponse(
+        data=error_msg,
+        msg_code=utils.MessageCodes.internal_error,
+        status_code=500,
+    )
