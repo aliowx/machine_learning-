@@ -96,3 +96,7 @@ async def internal_exceptions_handler(request: Request, exc: Any):
         msg_code=utils.MessageCodes.internal_error,
         status_code=500,
     )
+    
+    
+    
+async def create_internal_exceptions_handler():...
