@@ -55,3 +55,22 @@ def create_system_exception_handler(
         return response
     
     return exception_handler
+
+
+
+def create_exception_handler(status_code):
+    async def exception_handler(request: Request, exc:Any):
+        request_data = {
+            'data': str(exc.detail),
+            'msg_code': exc.msg_code,
+            'status_code': status_code
+        }
+        response = utils.APIErrorResponse(**request_data)
+        return response
+    
+    return exception_handler
+
+
+
+
+
