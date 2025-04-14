@@ -74,3 +74,10 @@ def create_exception_handler(status_code):
 
 
 
+async def http_exception_handler(request: Request, exc:Any):
+    response = utils.APIErrorResponse(
+        date=exc.detail,
+        msg_code=utils.MessageCodes.internal_error,
+        status_code=exc.status_code  
+    )
+    return response
