@@ -34,3 +34,24 @@ def get_traceback_info(exc: Exception):
     traceback_full = "".join(traceback.format_tb(exc.__traceback__))
     exception_type = type(exc).__name__
     return traceback_str, traceback_full, exception_type
+
+
+
+def create_system_exception_handler(
+    status_code: str,
+    msg_code: str
+):
+    async def exception_handler(request:Request, exc: Any):
+        exception_type, traceback_str, _ =get_traceback_info(exc)
+        logger.error(f"Exception of type {exception_type}:\n{traceback_str}")
+        
+        response_data = { 
+            "data": str(exc.errors()),
+            "msg_code":msg_code,
+            "status_code":status_code
+        }
+        
+        response = utils.APIErrorResponse(**response_data)
+        return response
+    
+    return exception_handler
