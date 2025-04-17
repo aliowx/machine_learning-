@@ -1,5 +1,3 @@
-from sqlalchemy import SQLColumnExpression
-from pydantic import BaseModel
 from sqlalchemy.orm import Mapped, mapped_column
 from app.db.base_class import Base
 from sqlalchemy import (
@@ -13,6 +11,7 @@ from sqlalchemy import (
 )
 
 class Prediction(Base):
+    
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     user_id: Mapped[int] = mapped_column(
