@@ -53,4 +53,10 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return response.scalar().all()
     
     
-    
+    async def get_count(
+        self,
+        db: AsyncSession,
+    )-> ModelType | None:
+        query = select(func.count()).select_from(select(self.model).subquery())
+        response = await  db.execute(query)
+        return response.scalar_one()
