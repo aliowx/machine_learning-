@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-analysis-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-analysis
+  template:
+    metadata:
+      labels:
+        app: data-analysis
+    spec:
+      containers:
+        - name: data-analysis-container
+          image: aliowx/data-analysis:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ENV
+              value: "production"
