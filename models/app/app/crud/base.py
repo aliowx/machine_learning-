@@ -38,3 +38,19 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         response = await db.execute(query)
         return response.scalar_one_or_none()
         
+    async def get_by_ids(
+        self,
+        db: AsyncSession,
+        list_ids: list[int | str]
+    )-> Sequence[Row | RowMapping | Any]:
+        query = select(self.model).where(
+            and_(
+                self.model.id.in_(list_ids),
+                self.model.is_deleted.is_(None)
+            )
+        )
+        response = await db.execute(query)
+        return response.scalar().all()
+    
+    
+    
