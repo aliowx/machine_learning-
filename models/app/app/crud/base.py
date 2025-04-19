@@ -100,4 +100,33 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         response = await db.execute(query)
         return response.scalars().all()
         
+    async def get_multi_order(
+        self,
+        db: AsyncSession,
+        skip: int = 0,
+        limit: int | None = 100,
+        order_by: list = None
+    )-> Sequence[Row | RowMapping | Any]:
+        if order_by is None:
+            order_by = []
+        order_by.append(self.model.id.asc())
         
+        query = (
+            select(
+                self.model
+            )
+            .where(
+                self.model.is_deleted.is_(None)
+            )
+            .order_by(
+                *order_by
+            )
+            .offset(
+                skip
+            )
+        )
+        if limit is None:
+            response = await db.execute(query)
+            return response.scalars().all()
+        response = await db.execute(query.limit(limit))
+        return response.scalars().all()
