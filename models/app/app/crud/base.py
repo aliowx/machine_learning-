@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from sqlalchemy import Row, RowMapping, and_, exc, func, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.base_class import Base
-
+from app.app import utils
 
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
@@ -130,3 +130,27 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             return response.scalars().all()
         response = await db.execute(query.limit(limit))
         return response.scalars().all()
+    
+    
+    
+    async def create(
+        self,
+        db: AsyncSession,
+        obj_in: CreateSchemaType | dict
+    )-> ModelType:
+        if not isinstance(obj_in, dict):
+            obj_in = jsonable_encoder(obj_in)
+        db_obj = self.model(**obj_in)
+        try:
+            db.add(db_obj)
+            await db.commit()
+            
+        except exc.IntegrityError:
+            await db.rollback()
+            raise HTTPException(
+                status_code=utils.MessageCodes.already_exist_object,
+                detail='Resource already exists'
+            )
+            
+        await db.refresh(db_obj)
+        return db_obj
