@@ -176,4 +176,27 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
                 detail="Resource already exists")
             
             
-        
+    async def update(
+        self,
+        db: AsyncSession,
+        db_obj: ModelType,
+        obj_in: UpdateSchemaType | dict[str, Any] | ModelType | None = None
+    )-> ModelType:
+        if obj_in is not None:
+            obj_data = jsonable_encoder(db_obj)
+            if isinstance(obj_in, dict):
+                update_data = obj_in
+            else:
+                update_data = obj_in.model_dump(exclude_unset=True)
+            for field in obj_data:
+                if field in obj_data:
+                    setattr(db_obj, field, update_data)
+            if hasattr(self.model, 'modified'):
+                setattr(db_obj, 'modified', datetime.now())
+            db.add(db_obj)
+            await db.commit()
+            await db.refresh(db_obj)
+            return db_obj
+
+
+                    
