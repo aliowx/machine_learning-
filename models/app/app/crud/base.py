@@ -199,4 +199,22 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             return db_obj
 
 
-                    
+    async def remove(
+        self,
+        db: AsyncSession,
+        id_: int | str
+    )-> ModelType | None:
+        query = (
+            update(self.model)
+            .where(
+                and_(
+                    self.model.id == id_,
+                    self.model.is_deleted.is_(None),
+                )
+            )
+            .values(is_deleted=datetime.utcnow())
+            .returning(self.model)
+        )
+        response = await db.execute(query)
+        await db.commit()
+        return response.scalar_one_or_none()
