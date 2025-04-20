@@ -25,3 +25,21 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         )
         response = await db.execute(query)
         return response.scalar_one_or_none()
+    
+    async def create(
+        self,
+        db: AsyncSession,
+        obj_in: UserCreate | dict  
+    )-> Base | None:
+        if isinstance(obj_in, dict):
+            password = obj_in['password']
+        else:
+            password = obj_in.password
+            
+        obj_in_data = jsonable_encoder(obj_in)
+        obj_in_data['hashed_password'] = get_password_hash(password)
+        del obj_in_data['password']
+        
+        obj_in_data = {k: v for k, v in obj_in_data.items() if v is not None}
+
+        return await super().create(db, obj_in=obj_in_data)                
