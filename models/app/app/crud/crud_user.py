@@ -42,4 +42,21 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         
         obj_in_data = {k: v for k, v in obj_in_data.items() if v is not None}
 
-        return await super().create(db, obj_in=obj_in_data)                
+        return await super().create(db, obj_in=obj_in_data)
+    
+    
+    async def update(
+        self,
+        db: AsyncSession,
+        db_obj: User,
+        obj_in: UserUpdate | dict[str, Any] | None = None
+    )-> User:
+        if isinstance(obj_in, dict):
+            update_data = obj_in
+        else:
+            update_data = obj_in.model_dump(exclude_unset=True)
+        if 'password' in update_data and update_data['password']:
+            hashed_password = get_password_hash(update_data['password'])
+            del  update_data['password']
+            update_data['hashed_password'] = hashed_password
+            return await super().update(db=db, obj_in=obj_in,obj_in=update_data)
