@@ -43,9 +43,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         obj_in_data = {k: v for k, v in obj_in_data.items() if v is not None}
 
         return await super().create(db, obj_in=obj_in_data)
-    
-<<<<<<< HEAD
-    
+        
     async def update(
         self,
         db: AsyncSession,
@@ -61,7 +59,8 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             del  update_data['password']
             update_data['hashed_password'] = hashed_password
             return await super().update(db=db, obj_in=obj_in,obj_in=update_data)
-=======
+        
+
     async def authenticate(
         self, db: AsyncSession, email: str, password: str
     ) -> User | None:
@@ -77,4 +76,5 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
 
     def is_superuser(self, user: User) -> bool:
         return user.is_superuser
->>>>>>> feature/add-crud-user
+
+user = CRUDUser(User)
