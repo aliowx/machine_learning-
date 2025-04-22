@@ -5,6 +5,7 @@ import jwt
 import bcrypt
 
 from fastapi.security import HTTPBasic
+import jwt.exceptions
 from app import exceptions as exc
 
 from app.core.config import settings
@@ -30,5 +31,8 @@ class JWTHandler:
 
     @staticmethod 
     def encode(payload: dict[str, Any])-> str:
-        expire=...
-
+        expire = datetime.utcnow() + timedelta(minutes=JWTHandler.access_token_expire)
+        payload.update({'exp': expire})
+        return jwt.encode(
+            payload, JWTHandler.secret_key, algorithm=JWTHandler.algorithm
+        )
