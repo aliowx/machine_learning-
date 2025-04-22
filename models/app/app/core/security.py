@@ -63,3 +63,21 @@ class JWTHandler:
                 msg_code=MessageCodes.invalid_token,
             )
         
+        
+        
+    @staticmethod
+    def decode_expired(token: str)-> dict:
+        try:
+            return jwt.decode(
+                token,
+                JWTHandler.secret_key,
+                algorithms=[JWTHandler.algorithm],
+                options={"verify_exp": False},
+            )
+        except jwt.InvalidTokenError:
+            raise exc.UnauthorizedException(
+                detail="Invalid token",
+                msg_code=MessageCodes.invalid_token,
+            )
+        
+        
