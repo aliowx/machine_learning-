@@ -44,3 +44,22 @@ class JWTHandler:
         return jwt.encode(
             payload, JWTHandler.secret_key, algorithm=JWTHandler.algorithm
         )
+
+    @staticmethod
+    def decode(token: str)-> dict:
+        try:
+            result: dict = jwt.decode(
+                token, JWTHandler.secret_key, algorithms=[JWTHandler.algorithm]
+            )
+            return result
+        except jwt.ExpiredSignatureError:
+            raise exc.UnauthorizedException(
+                detail="Token expired",
+                msg_code=MessageCodes.expired_token,
+            )
+        except jwt.InvalidTokenError:
+            raise exc.UnauthorizedException(
+                detail="Invalid token",
+                msg_code=MessageCodes.invalid_token,
+            )
+        
