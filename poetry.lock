@@ -2823,6 +2823,21 @@ sql = ["pydantic-sqlalchemy", "sqlalchemy"]
 test = ["mongomock", "pydantic-sqlalchemy", "pymongo", "pytest", "python-dotenv", "requests", "responses", "sqlalchemy"]
 
 [[package]]
+name = "redis"
+version = "5.2.1"
+description = "Python client for Redis database and key-value store"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4"},
+    {file = "redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f"},
+]
+
+[package.extras]
+hiredis = ["hiredis (>=3.0.0)"]
+ocsp = ["cryptography (>=36.0.1)", "pyopenssl (==23.2.1)", "requests (>=2.31.0)"]
+
+[[package]]
 name = "requests"
 version = "2.32.3"
 description = "Python HTTP for Humans."
@@ -3687,4 +3702,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "a32ddb530cb93b7268aa6a856a121d4f4f43a149f02a8d3b142e725b2b29cc2c"
+content-hash = "305f855f294419e56e782f0e33e0646ff6eadaaec12923b251b45c5c0467f952"
