@@ -1,6 +1,6 @@
 import logging 
 import secrets
-from types import AsyncGeneratorType
+from typing import AsyncGenerator
 from fastapi.security import HTTPAuthorizationCredentials
 import redis.asyncio as redis
 from fastapi import Depends, Request, Response
@@ -17,3 +17,9 @@ from app.core.config import(
 from app.core.security import JWTHandler, basic_security
 from app.db.session import async_session
 
+
+async def get_db_async() -> AsyncGenerator:
+    # get database///
+
+    async with async_session() as session:
+        yield session 
