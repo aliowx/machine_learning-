@@ -1,7 +1,7 @@
 import logging 
 import secrets
 from typing import AsyncGenerator
-from fastapi.security import HTTPAuthorizationCredentials
+from fastapi.security import HTTPBasicCredentials
 import redis.asyncio as redis
 from fastapi import Depends, Request, Response
 from redis.asyncio import client
@@ -137,3 +137,14 @@ def get_current_superuser_from_cookie(
 
 
 
+
+def _get_basic_credentials(
+    credentials: HTTPBasicCredentials = Depends(basic_security)
+)-> tuple[str,str]:
+    if not credentials or not credentials.username or not credentials.password:
+        raise exc.UnauthorizedException(
+            msg_code=utils.MessageCodes.not_authorized,
+            headers={"WWW-Authenticate": "Basic"},
+        )
+
+    return credentials
