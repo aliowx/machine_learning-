@@ -103,3 +103,20 @@ async def get_user_id_from_cookie(
 
     return int(user_id)
 
+
+
+async def get_current_user_from_cookie(
+    db: AsyncSession = Depends(get_db_async),
+    current_user_id: int = Depends(get_user_id_from_cookie)
+) -> schemas.User:
+    
+    current_user = await crud.user.get(db=db, id_=current_user_id)
+    
+    
+    if not current_user:
+        raise exc.ForbiddenException(msg_code=utils.MessageCodes.invalid_token)
+    
+    if not crud.user.is_active(current_user):
+        raise exc.ForbiddenException(msg_code=utils.MessageCodes.inactive_user)
+    
+    return current_user
