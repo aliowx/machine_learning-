@@ -120,3 +120,20 @@ async def get_current_user_from_cookie(
         raise exc.ForbiddenException(msg_code=utils.MessageCodes.inactive_user)
     
     return current_user
+
+
+
+
+def get_current_superuser_from_cookie(
+    current_user: models.User = Depends(get_current_user_from_cookie)
+) -> models.User:
+    
+    if not crud.user.is_superuser(current_user):
+        raise exc.ForbiddenException(
+            detail="Permission Error",
+            msg_code=utils.MessageCodes.permission_error,
+        )
+    return current_user
+
+
+
