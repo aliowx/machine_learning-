@@ -65,4 +65,41 @@ async def get_user_id_from_cookie(
                 msg_code=utils.MessageCodes.invalid_token
             )
             
-    except :...
+    except:
+        refresh_token = request.cookies.get('Refresh-Token')
+        if not refresh_token:
+            raise exc.UnauthorizedException(
+                msg_code=utils.MessageCodes.refresh_token_not_found
+            )
+            
+        refresh_token_data = JWTHandler.decode(refresh_token)
+        
+        
+        if (
+            await cache.get(REFRESH_TOKEN_BLOCKLIST_KEY.format(token=refresh_token))
+            or refresh_token_data.get("sub") != "refresh"            
+        ):
+            raise exc.UnauthorizedException(
+                msg_code=utils.MessageCodes.invalid_token
+            )
+            
+            
+            
+        user_id = refresh_token_data.get('id')
+        
+        token = JWTHandler.encode(payload={"sub": "access", "id": user_id})
+        
+        
+        response.set_cookie(
+            key="Access-Token",
+            value=token,
+            secure=True,
+            httponly=True,
+            samesite="strict" if not settings.DEBUG else "none",
+            expires=JWTHandler.token_expiration(token),
+        )
+        
+    request.state.user_id = user_id
+
+    return int(user_id)
+
