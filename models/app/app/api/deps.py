@@ -202,3 +202,39 @@ def get_current_superuser_from_basic(
     return current_user
 
 
+
+
+async def get_current_user_from_cookie_or_basic(
+    request: Request,
+    response: Response,
+    credentials: HTTPBasicCredentials = Depends(basic_security),
+    cache: client.Redis = Depends(get_redis),
+    db: AsyncSession = Depends(get_db_async),
+) -> models.User:
+
+    current_user = None
+
+    try:
+        current_user_id_from_cookie = await get_user_id_from_cookie(
+            request=request, response=response, cache=cache
+        )
+
+        current_user = await crud.user.get(db=db, id_=current_user_id_from_cookie)
+    except:
+
+        try:
+            logger.debug("try to login with basic")
+            credentials = _get_basic_credentials(credentials=credentials)
+            current_user = await crud.user.authenticate(
+                db=db, email=credentials.username, password=credentials.password
+            )
+        except:
+            pass
+    if not current_user or not crud.user.is_active(current_user):
+        raise exc.UnauthorizedException(
+            msg_code=utils.MessageCodes.not_authorized,
+        )
+
+    request.state.user_id = str(current_user.id)
+    return current_user
+
