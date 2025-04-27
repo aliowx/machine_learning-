@@ -148,3 +148,27 @@ def _get_basic_credentials(
         )
 
     return credentials
+
+
+
+def health_user(
+    credentials: HTTPBasicCredentials = Depends(_get_basic_credentials),
+) -> str:
+
+    if not (
+        secrets.compare_digest(
+            credentials.username.encode("utf8"), settings.HEALTH_USERNAME.encode("utf8")
+        )
+        and secrets.compare_digest(
+            credentials.password.encode("utf8"), settings.HEALTH_PASSWORD.encode("utf8")
+        )
+    ):
+        raise exc.UnauthorizedException(
+            msg_code=utils.MessageCodes.incorrect_email_or_password,
+            headers={"WWW-Authenticate": "Basic"},
+        )
+
+    return credentials.username
+
+
+
