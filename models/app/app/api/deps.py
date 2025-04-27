@@ -172,3 +172,21 @@ def health_user(
 
 
 
+async def get_current_user_from_basic(
+    request: Request,
+    db: AsyncSession = Depends(get_db_async),
+    credentials: HTTPBasicCredentials = Depends(_get_basic_credentials)
+)-> str:
+
+    current_user = await crud.user.authenticate(
+        db=db, email=credentials.username, password=credentials.password
+    )
+    if not current_user or not crud.user.is_active(current_user):
+        raise exc.UnauthorizedException(
+            msg_code=utils.MessageCodes.incorrect_email_or_password,
+            headers={"WWW-Authenticate": "Basic"},
+        )
+
+    request.state.user_id = str(current_user.id)
+    return current_user
+
