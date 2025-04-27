@@ -190,3 +190,15 @@ async def get_current_user_from_basic(
     request.state.user_id = str(current_user.id)
     return current_user
 
+
+
+def get_current_superuser_from_basic(
+    current_user: models.User = Depends(get_current_user_from_basic)
+)-> models.User:
+    if not crud.user.is_superuser(current_user):
+        raise exc.ForbiddenException(
+            msg_code=utils.MessageCodes.permission_error
+        )        
+    return current_user
+
+
