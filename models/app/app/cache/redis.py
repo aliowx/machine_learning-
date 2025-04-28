@@ -1,0 +1,25 @@
+import os 
+import redis.asyncio as redis
+from typing import Tuple
+from redis.asyncio import client
+from cache.enums import RedisStatus
+
+
+
+
+async def redis_connect(host_url: str) -> Tuple[RedisStatus, client.Redis]:...
+
+
+
+async def _connect(host: str) -> Tuple[RedisStatus, client.Redis]:
+    try:
+        redis_client = await redis.from_url(host)
+        if await redis_client.ping():
+            return RedisStatus.CONNECTED, redis_client
+        return RedisStatus.CONNECTED, None
+    except redis.AuthenticationError:
+        return (RedisStatus.AUTH_ERROR, None)
+    except redis.ConnectionError:
+        return (RedisStatus.CONN_ERROR, None)
+
+
