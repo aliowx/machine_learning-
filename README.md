@@ -32,7 +32,7 @@ docker-compose up -d --build
 
 ## Cache
 If you want to use cache in your project, it is better to read its documentation first:
-[cache document](/app/cache/cache-doc.md)
+[cache document](models/app/app/cache/cache-doc.md)
 
 ## Run Test 
 Before running other tests, it is recommended to execute the CRUD tests first. 
