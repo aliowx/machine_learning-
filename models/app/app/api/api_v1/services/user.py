@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from app import crud, models, schemas
-from app import exceptions as exc
-from app.utils import  MessageCodes
+from app.app import crud, models, schemas
+from app.app import exceptions as exc
+from app.app.utils import  MessageCodes
 
 
 async def read_user_by_id(

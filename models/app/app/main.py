@@ -8,12 +8,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 from starlette.middleware.cors import CORSMiddleware
 from app.app.core.middleware.get_accept_language_middleware import GetAcceptLanguageMiddleware
-from app.api.api_v1.api import api_router
-from app.core.config import settings
-from app.core.middleware import TimeLoggerMiddleware
-from app.exceptions import exception_handlers
-from app.models import User
-from cache import Cache
+from app.app.api.api_v1.api import api_router
+from app.app.core.config import settings
+from app.app.core.middleware import TimeLoggerMiddleware
+from app.app.exceptions import exception_handlers
+from app.app.models import User
+from app.app.cache import Cache
 
 import os
 

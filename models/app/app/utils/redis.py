@@ -1,6 +1,6 @@
 import redis.asyncio as redis
 
-from app.core.config import settings
+from app.app.core.config import settings
 
 
 redis_url = str(settings.REDIS_URI)

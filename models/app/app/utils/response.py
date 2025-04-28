@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from typing_extensions import Self
 
-from app import utils
+from app.app import utils
 
 T = TypeVar("T")
 

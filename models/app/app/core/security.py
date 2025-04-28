@@ -6,10 +6,10 @@ import bcrypt
 
 from fastapi.security import HTTPBasic
 import jwt.exceptions
-from app import exceptions as exc
+from app.app import exceptions as exc
 
-from app.core.config import settings
-from app.utils import MessageCodes
+from app.app.core.config import settings
+from app.app.utils import MessageCodes
 
 
 basic_security = HTTPBasic(auto_error=False)

@@ -2,11 +2,11 @@ from typing import Any
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.crud.base import CRUDBase
-from app.db.base_class import  Base
-from app.models.user import User
-from app.schemas.user import UserCreate, UserUpdate
-from app.core.security import get_password_hash, verify_password
+from app.app.crud.base import CRUDBase
+from app.app.db.base_class import  Base
+from app.app.models.user import User
+from app.app.schemas.user import UserCreate, UserUpdate
+from app.app.core.security import get_password_hash, verify_password
 
 
 
@@ -58,7 +58,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             hashed_password = get_password_hash(update_data['password'])
             del  update_data['password']
             update_data['hashed_password'] = hashed_password
-            return await super().update(db=db, obj_in=obj_in,obj_in=update_data)
+            return await super().update(db=db, db_obj=obj_in,obj_in=update_data)
         
 
     async def authenticate(

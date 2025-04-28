@@ -1,6 +1,6 @@
 from sqlalchemy import Integer, String, Text, Float
 from sqlalchemy.orm import mapped_column, Mapped
-from app.db.base_class import Base
+from app.app.db.base_class import Base
 
 
 class RequestLog(Base):
