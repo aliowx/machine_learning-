@@ -4,7 +4,7 @@ from fastapi import Response, Request
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
 
-from app.core.config import settings
+from app.app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
