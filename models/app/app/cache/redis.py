@@ -7,13 +7,15 @@ from cache.enums import RedisStatus
 
 
 
-async def redis_connect(host_url: str) -> Tuple[RedisStatus, client.Redis]:...
+async def redis_connect(host_url: str) -> Tuple[RedisStatus, client.Redis]:
+    return ( await
+        _connect(host_url)
+    )
 
 
-
-async def _connect(host: str) -> Tuple[RedisStatus, client.Redis]:
+async def _connect(host_url: str) -> Tuple[RedisStatus, client.Redis]:
     try:
-        redis_client = await redis.from_url(host)
+        redis_client = await redis.from_url(host_url)
         if await redis_client.ping():
             return RedisStatus.CONNECTED, redis_client
         return RedisStatus.CONNECTED, None
