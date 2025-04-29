@@ -29,4 +29,24 @@ async def read_users(
 
 
 
-
+@router.put('/{user_id}')
+@cache(namespace=namespace, expire=ONE_DAY_IN_SECONDS)
+async def update_user(
+    user_id: int,
+    user_in: schemas.UserCreate,
+    db: AsyncSession = Depends(deps.get_db_async),
+    current_user: models.User = Depends(deps.get_current_user_from_cookie_or_basic)
+    
+)-> APIResponseType[schemas.User]:
+    """
+    Update User
+    """
+    
+    
+    response = await services.update_user(
+        user_id=user_id,
+        user_in=user_in,
+        db=db,
+        current_user=current_user
+    )
+    return APIResponse(response)
