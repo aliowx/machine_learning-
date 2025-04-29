@@ -6,10 +6,10 @@ from typing import Callable, Dict, List, Optional, Tuple, Type, Union
 from fastapi import Request, Response
 from redis.asyncio import client
 
-from app.app.cache.enums import RedisEvent, RedisStatus
-from app.app.cache.key_gen import get_cache_key, get_cache_key_pattern
-from app.app.cache.redis import redis_connect
-from app.app.cache.util import serialize_json
+from app.cache.enums import RedisEvent, RedisStatus
+from app.cache.key_gen import get_cache_key, get_cache_key_pattern
+from app.cache.redis import redis_connect
+from app.cache.util import serialize_json
 
 DEFAULT_RESPONSE_HEADER = "X-FastAPI-Cache"
 ALLOWED_HTTP_TYPES = ["GET"]

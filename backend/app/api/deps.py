@@ -6,17 +6,17 @@ import redis.asyncio as redis
 from fastapi import Depends, Request, Response
 from redis.asyncio import client
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.app import crud, schemas, models, utils
-from app.app import exceptions as exc
-from app.app.utils import redis_client
+from app import crud, schemas, models, utils
+from app import exceptions as exc
+from app.utils import redis_client
  
-from app.app.core.config import(
+from app.core.config import(
     settings,
     ACCESS_TOKEN_BLOCKLIST_KEY,
     REFRESH_TOKEN_BLOCKLIST_KEY
 )
-from app.app.core.security import JWTHandler, basic_security
-from app.app.db.session import async_session
+from app.core.security import JWTHandler, basic_security
+from app.db.session import async_session
 
 logger = logging.getLogger(__name__)   
 

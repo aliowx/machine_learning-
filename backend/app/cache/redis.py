@@ -2,7 +2,7 @@ import os
 import redis.asyncio as redis
 from typing import Tuple
 from redis.asyncio import client
-from app.app.cache.enums import RedisStatus
+from app.cache.enums import RedisStatus
 
 
 

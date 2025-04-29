@@ -5,7 +5,7 @@ from typing import Any, Callable, Dict, List
 
 from fastapi import Request, Response
 
-from app.app.cache.types import ArgType, SigParameters
+from app.cache.types import ArgType, SigParameters
 
 ALWAYS_IGNORE_ARG_TYPES = [Response, Request]
 

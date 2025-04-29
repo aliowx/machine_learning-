@@ -1,7 +1,7 @@
 """ Message codes for api responses """
 
 
-from app.app.core.middleware.get_accept_language_middleware import get_accept_language
+from app.core.middleware.get_accept_language_middleware import get_accept_language
 
 
 

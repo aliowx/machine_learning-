@@ -8,8 +8,8 @@ from typing import Union
 
 from fastapi import Response
 
-from app.app.cache.client import Cache
-from app.app.cache.util import (
+from app.cache.client import Cache
+from app.cache.util import (
     deserialize_json,
     ONE_DAY_IN_SECONDS,
     ONE_HOUR_IN_SECONDS,

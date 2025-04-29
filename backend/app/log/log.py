@@ -7,8 +7,8 @@ from fastapi import BackgroundTasks, Request
 from fastapi.responses import Response
 from fastapi.routing import APIRoute
 
-from app.app import crud, exceptions, schemas
-from app.app.db import session
+from app import crud, exceptions, schemas
+from app.db import session
 
 
 logger = logging.getLogger(__name__)

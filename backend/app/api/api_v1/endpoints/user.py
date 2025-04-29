@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.app import crud, models, schemas
-from app.app.api import deps
-from app.app.api.api_v1 import services
-from app.app.log import  log
-from app.app.utils import APIResponse, APIResponseType
-from app.app.cache import cache, invalidate
-from app.app.cache.util import ONE_DAY_IN_SECONDS
+from app import crud, models, schemas
+from app.api import deps
+from app.api.api_v1 import services
+from app.log import  log
+from app.utils import APIResponse, APIResponseType
+from app.cache import cache, invalidate
+from app.cache.util import ONE_DAY_IN_SECONDS
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
