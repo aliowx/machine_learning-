@@ -9,6 +9,8 @@ from app.app.utils import APIResponse, APIResponseType
 from app.app.cache import cache, invalidate
 from app.app.cache.util import ONE_DAY_IN_SECONDS
 from sqlalchemy.ext.asyncio import AsyncSession
+
+
 router = APIRouter()
 namespace = 'user'
 
