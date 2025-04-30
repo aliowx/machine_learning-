@@ -1,45 +1,37 @@
+from datetime import datetime
+from typing import Any
+
+from persiantools.jdatetime import JalaliDate
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import DeclarativeBase, mapped_column
 from sqlalchemy.sql.schema import Column
 from sqlalchemy.sql.sqltypes import DateTime
 
-from datetime import datetime
-from typing import Any
-
-from persiantools.jdatetime import JalaliDate
-
-
 
 class Base(DeclarativeBase):
     id: Any
     __name__: str
-    
-    #Generate __tablename__ automatically
-    
+
+    # Generate __tablename__ automatically
     @declared_attr
-    def __tablename__(cls)-> str:
+    def __tablename__(cls) -> str:
         return cls.__name__.lower()
-    
-    
+
     is_deleted = mapped_column(
         DateTime(timezone=True),
-        default=datetime.utcnow,
+        nullable=True,
         index=True,
-        onupdate=datetime.utcnow
     )
-    
     created = mapped_column(
         DateTime(timezone=True), default=datetime.utcnow, index=True
     )
-    
     modified = mapped_column(
         DateTime(timezone=True),
         default=datetime.utcnow,
         index=True,
-        onupdate=datetime.utcnow
+        onupdate=datetime.utcnow,
     )
-    
-    
+
     def __str__(self):
         return f"{self.__tablename__}:{self.id}"
 
