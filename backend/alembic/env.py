@@ -7,7 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 
-from app.db.base_class import Base
+from app.db.base import Base
 from app.db.parser import CustomJSONEncoder, CustomJSONDecoder
 from app.core.config import settings
 
