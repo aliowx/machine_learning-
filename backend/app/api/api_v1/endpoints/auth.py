@@ -22,9 +22,8 @@ async def login(
     db: AsyncSession = Depends(deps.get_db_async),
 ) -> APIResponseType[schemas.Msg]:
     """Save User Refresh and Access Token to cookie"""
-
+    
     tokens = await services.login(db=db, user_in=user_in)
-    print(11111111111)
 
     response.set_cookie(
         key="Refresh-Token",
