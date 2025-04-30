@@ -29,6 +29,11 @@
 [![API docs](photo/app_ML.png)]
 
 
+### Interactive API Documentation
+
+[![API docs](photo/api.png)]
+
+
 ## Local Development with Poetry:
 
 [check this page](app/README.md).
