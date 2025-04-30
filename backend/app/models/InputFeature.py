@@ -15,7 +15,6 @@ class InputFeature(Base):
     
     prediction_id: Mapped[int] = mapped_column(
         Integer,
-        ForeignKey('Prediction.id'),
         index=True
     )
     

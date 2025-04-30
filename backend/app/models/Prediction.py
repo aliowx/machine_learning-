@@ -21,7 +21,6 @@ class Prediction(Base):
     )  
     model_version_id: Mapped[int] = mapped_column(
         Integer,
-        ForeignKey('ModelVersion.id'),
         nullable=False
     )
     prediction_result: Mapped[str] = mapped_column(
