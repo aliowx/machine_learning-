@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Dashboard from './Dashboard';
 import './App.css';
 
-function App() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -14,14 +17,17 @@ function App() {
     setMessage('');
 
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/login/', {
+      const response = await axios.post('http://127.0.0.1:5678/api/v1/auth/login', {
         email,
         password,
       });
       setMessage(response.data.message);
       localStorage.setItem('access_token', response.data.access_token);
-    } catch (error) {
-      setMessage(error.response?.data?.detail || "There is problem");
+      navigate('/dashboard'); 
+      } catch (error) {
+      console.log("Error:", error);
+      console.log("Error Response:", error.response);
+      setMessage(error.response?.data?.detail || "Failed to connect to server");
     } finally {
       setLoading(false);
     }
@@ -59,6 +65,17 @@ function App() {
       </form>
       {message && <p className="message">{message}</p>}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 

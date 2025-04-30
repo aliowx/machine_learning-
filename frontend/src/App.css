@@ -2,12 +2,9 @@
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   text-align: center;
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  color: #333;
 }
 
 .login-form {
@@ -19,24 +16,21 @@ h1 {
 .form-group {
   display: flex;
   flex-direction: column;
-  text-align: right;
+  text-align: left;
 }
 
 label {
   margin-bottom: 5px;
-  font-weight: bold;
 }
 
 input {
-  padding: 10px;
-  font-size: 16px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 button {
   padding: 10px;
-  font-size: 16px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -50,6 +44,6 @@ button:disabled {
 }
 
 .message {
-  margin-top: 20px;
-  color: #d9534f;
+  margin-top: 10px;
+  color: red;
 }
