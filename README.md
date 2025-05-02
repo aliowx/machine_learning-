@@ -1,4 +1,4 @@
-# Full Stack FastAPI-Machine_learning
+# Full Stack FastAPI-Machine Learning
 
 <a href="https://github.com/fastapi/full-stack-fastapi-template/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/fastapi/full-stack-fastapi-template/workflows/Test/badge.svg" alt="Test"></a>
 <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/fastapi/full-stack-fastapi-template" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/fastapi/full-stack-fastapi-template.svg" alt="Coverage"></a>
@@ -24,14 +24,19 @@
 - 🚢 Deployment instructions using Docker Compose, including how to set up a frontend Traefik proxy to handle automatic HTTPS certificates.
 - 🏭 CI (continuous integration) and CD (continuous deployment) based on GitHub Actions.
 
+### Model Training 
+
+![API docs](photo/ML.png)
+
+
 ### Dashboard Login
 
-[![API docs](photo/app_ML.png)]
+![API docs](photo/app_ML.png)
 
 
 ### Interactive API Documentation
 
-[![API docs](photo/api.png)]
+![API docs](photo/api.png)
 
 
 ## Local Development with Poetry:
