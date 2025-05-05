@@ -49,6 +49,14 @@ def even_loop()-> Generator:
     yield loop 
     loop.close()
     
-    
-    
-    
+
+@pytest_asyncio.fixture(scope='session')
+async def async_db()-> AsyncGenerator:
+    async with async_session() as session:
+        async with async_engine.begin() as connection:
+            await connection.run_sync(Base.metadata.drop_all)
+            await connection.run_sync(Base.metadata.create_all)
+        await init_db(db=session)
+        yield session
+
+    await async_engine.dispose()
