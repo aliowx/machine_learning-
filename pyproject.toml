@@ -33,6 +33,7 @@ asyncpg = "^0.30.0"
 psycopg2 = "^2.9.10"
 pyjwt = "2.8.0"
 pytest = "^8.3.5"
+httpx = "^0.28.1"
 
 
 [tool.poetry.group.dev.dependencies]
