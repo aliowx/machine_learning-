@@ -25,11 +25,11 @@ class MessageCodes:
         for accept_language in parsed_accept_languages:
             match accept_language:
                 case "fa":
-                    return cls.persian_message_names[message_code]
+                    return cls.english_messages_names[message_code]
                 case "en":
                     return cls.english_messages_names[message_code]
 
-        return cls.persian_message_names[message_code]
+        return cls.english_messages_names[message_code]
 
     # main codes start from 0
     successful_operation = 0
