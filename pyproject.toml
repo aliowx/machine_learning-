@@ -32,6 +32,7 @@ pydantic = {extras = ["email"], version = "^2.11.3"}
 asyncpg = "^0.30.0"
 psycopg2 = "^2.9.10"
 pyjwt = "2.8.0"
+pytest = "^8.3.5"
 
 
 [tool.poetry.group.dev.dependencies]
