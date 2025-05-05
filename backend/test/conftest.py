@@ -13,4 +13,23 @@ from app.core.security import JWTHandler
 from app.db.init_db import init_db
 from app.db import session as db_session
 
+ASYNC_SQLALCHEMY_DATABASE_URL = f"sqlite+aiosqlite:///./test.db"
+
+
+async_engine = create_async_engine(ASYNC_SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
+
+async_session = async_sessionmaker(
+    bind=async_engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+    autocommit=False,
+    autoflush=False,
+)
+
+
+async def override_get_db_async() -> AsyncGenerator:
+    async with async_session() as db:
+        yield db
+        await db.commit()
+
 
