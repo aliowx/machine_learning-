@@ -33,3 +33,22 @@ async def override_get_db_async() -> AsyncGenerator:
         await db.commit()
 
 
+
+
+app.dependency_overrides[get_db_async] = override_get_db_async
+
+
+@pytest.fixture(autouse=True)
+def patch_async_session_maker(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(db_session, "async_session", async_session)
+
+
+@pytest.fixture(scope="session")
+def even_loop()-> Generator:
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop 
+    loop.close()
+    
+    
+    
+    
