@@ -1,10 +1,12 @@
 import asyncio
+import time
 from typing import Generator, AsyncGenerator
-from fastapi.testclient import  TestClient
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 import pytest
 import pytest_asyncio
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+from httpx import AsyncClient
 from app.api.deps import get_db_async
 from app.main import app, settings
 from app.db import Base
@@ -44,14 +46,15 @@ def patch_async_session_maker(monkeypatch: pytest.MonkeyPatch):
 
 
 @pytest.fixture(scope="session")
-def even_loop()-> Generator:
+def event_loop(request) -> Generator:  # noqa: indirect usage
     loop = asyncio.get_event_loop_policy().new_event_loop()
-    yield loop 
+    yield loop
     loop.close()
-    
 
-@pytest_asyncio.fixture(scope='session')
-async def async_db()-> AsyncGenerator:
+
+@pytest_asyncio.fixture(scope="session")
+async def db() -> AsyncSession:  # type: ignore
+
     async with async_session() as session:
         async with async_engine.begin() as connection:
             await connection.run_sync(Base.metadata.drop_all)
@@ -60,3 +63,24 @@ async def async_db()-> AsyncGenerator:
         yield session
 
     await async_engine.dispose()
+
+
+@pytest_asyncio.fixture(scope="module")
+async def client(db) -> AsyncClient:  # type: ignore
+    app.dependency_overrides[get_db_async] = lambda: db
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        yield client
+
+
+@pytest_asyncio.fixture(scope="session")
+async def superuser_tokens(db: AsyncSession) -> dict[str, str]:  # noqa: indirect usage
+    user = await crud_user.user.get_by_email(db=db, email=settings.FIRST_SUPERUSER)
+    assert user != None
+
+    refresh_token = JWTHandler.encode_refresh_token(
+        payload={"sub": "refresh", "id": str(user.id)}
+    )
+    access_token = JWTHandler.encode(payload={"sub": "access", "id": str(user.id)})
+
+    tokens = {"Refresh-Token": refresh_token, "Access-Token": access_token}
+    return tokens
