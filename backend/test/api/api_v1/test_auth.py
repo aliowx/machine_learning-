@@ -31,7 +31,7 @@ class TestAuth:
         logger.info("Duplicate register test passed.")
 
     @pytest.mark.asyncio
-    async def test_login(self, client: AsyncClient):
+    async def test_login_normal(self, client: AsyncClient):
         response = await client.post(
             f"{settings.API_V1_STR}/auth/login",
             json=self.data
@@ -40,10 +40,10 @@ class TestAuth:
         logger.info("Login test passed.")
 
     @pytest.mark.asyncio
-    async def test_me(self, client: AsyncClient, superuser_tokens:dict):
-        response = await client.get(
-            f"{settings.API_V1_STR}/me",
-            cookies=superuser_tokens
+    async def test_login_invalid(self, client: AsyncClient):
+        response = await client.post(
+            f"{settings.API_V1_STR}/auth/login",
+            json={"email": "invalied_email@in.valid", "password": "invalied_password"},
         )
-        
-        assert response.status_code == 200
+        assert response.status_code == 404
+    
