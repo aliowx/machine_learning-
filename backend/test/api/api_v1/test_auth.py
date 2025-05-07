@@ -47,3 +47,13 @@ class TestAuth:
         )
         assert response.status_code == 404
     
+    @pytest.mark.asyncio
+    async def test_auth_and_tokens(self, client: AsyncClient):
+        response = await client.post(
+            f"{settings.API_V1_STR}/auth/login",
+            json=self.data
+        )
+        
+        assert response.status_code == 200
+        
+        # cookies = dict(response.cookies.items())
