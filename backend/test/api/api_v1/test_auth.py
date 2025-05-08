@@ -53,7 +53,16 @@ class TestAuth:
             f"{settings.API_V1_STR}/auth/login",
             json=self.data
         )
-        
         assert response.status_code == 200
+    
+    @pytest.mark.asyncio
+    async def call_service_with_access_and_refresh_tokens(self, client: AsyncClient):
+        response = await client.post(
+            f"{settings.API_V1_STR}/auth/login",
+            json=self.data
+        )
+        cookies = dict(response.cookies.items())
         
-        # cookies = dict(response.cookies.items())
+        response = await client.get(f'{settings.API_V1_STR}/auth/me', cookies=cookies)
+        
+        assert response.status_code == 404 
