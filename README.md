@@ -68,17 +68,17 @@ docker-compose up -d --build
 
 ## Cache
 If you want to use cache in your project, it is better to read its documentation first:
-[cache document](models/app/app/cache/cache-doc.md)
+[cache document](backend/app/cache/cache-doc.md)
 
 ## Run Test 
 Before running other tests, it is recommended to execute the CRUD tests first. 
 This ensures the creation of initial data necessary for subsequent tests.
 
 ```bash
-# Run CRUD tests:
+# Run CRUD tests cd /backend:
 pytest tests/crud/
-# Run other tests:
-pytest tests
+# Run other tests cd /backend:
+pytest
 ```
 
 ## TODO List:
