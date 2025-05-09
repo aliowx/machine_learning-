@@ -69,4 +69,20 @@ class TestAuth:
         assert response.status_code == 404 
         logger.info("Call service access and tokens refresh test passed.")
         
-        
+    @pytest.mark.asyncio   
+    async def test_login(self, client: AsyncClient):
+
+        # normal login
+        response = await client.post(
+            f"{settings.API_V1_STR}/auth/login", json=self.data
+        )
+        assert response.status_code == 200
+        assert response.cookies.get("Access-Token") is not None
+        assert response.cookies.get("Refresh-Token") is not None
+
+        # invalid login
+        response = await client.post(
+            f"{settings.API_V1_STR}/auth/login",
+            json={"email": "invalied_email@in.valid", "password": "invalied_password"},
+        )
+        assert response.status_code == 200 
