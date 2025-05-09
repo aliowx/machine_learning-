@@ -70,4 +70,5 @@ class TestAuth:
         logger.info("Call service access and tokens refresh test passed.")
         
         
-    # @pytest.mark.asyncio
+    @pytest.mark.asyncio
+    async def auth_():...
