@@ -26,6 +26,7 @@
 
 ![API docs](photo/ML.png)
 
+[check the model](photo/model.png).
 
 ### Dashboard Login
 
