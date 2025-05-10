@@ -23,6 +23,8 @@ def test_db_log(
 
     return schemas.Msg(msg="your request logged in my db!")
 
+#_________________________________________________________
+
 @router.post("/test-celery/", response_model=schemas.Msg, status_code=201)
 def test_celery(
     msg: schemas.Msg,
