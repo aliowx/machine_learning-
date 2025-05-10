@@ -7,10 +7,6 @@ import pickle
 import pandas as pd
 import io
 
-
-with open("model.pkl", "rb") as file:
-    model = pickle.load(file)
-    
     
 namespace = "job worker"
 
@@ -47,25 +43,27 @@ def process_csv_task(self, csv_content: str):
         if df.empty:
             raise ValueError("CSV file is empty")
 
+        if df.columns is None or len(df.columns) == 0:
+            raise ValueError("No columns found in the CSV file")
+
+        # Ensure all columns are numeric
         numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
         if len(numeric_cols) != len(df.columns):
             raise ValueError("All columns must be numeric")
 
         logger.info(f"{namespace} - original shape: {df.shape}")
-        
 
-        if df.columns is None or len(df.columns) == 0:
-            raise ValueError("No columns found in the CSV file")
-
-
+        # Fill missing values
         if df.isnull().values.any():
             df = df.fillna(df.mean(numeric_only=True))
 
-
+        # Sort by the first column
         df = df.sort_values(by=df.columns[0])
 
-
-        df[numeric_cols] = (df[numeric_cols] - df[numeric_cols].mean()) / df[numeric_cols].std()
+        # Normalize
+        stds = df[numeric_cols].std()
+        stds[stds == 0] = 1  # prevent division by zero
+        df[numeric_cols] = (df[numeric_cols] - df[numeric_cols].mean()) / stds
 
         logger.info(f"{namespace} - cleaned shape: {df.shape}")
 
