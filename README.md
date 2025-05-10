@@ -26,7 +26,7 @@
 
 ![API docs](photo/ML.png)
 
-[check this page](notebook/unsupervised learning/model.png).
+[check the model](photo/model.png).
 
 ### Dashboard Login
 
