@@ -10,3 +10,15 @@ router_with_log = APIRouter(route_class=log.LogRoute)
 router = APIRouter()
 
 
+@router_with_log.post("test-db-log", response_model=schemas.Msg, status_code=200)
+def test_db_log(
+    request: Request,
+    tracker_id: str,
+    _: models.User = Depends(deps.get_current_superuser_from_cookie_or_basic),
+) -> Any:
+    """
+    This is an example of using log route handler.
+    """
+    request.state.tracker_id = tracker_id
+
+    return schemas.Msg(msg="your request logged in my db!")
