@@ -25,7 +25,7 @@
 ### Model Training 
 
 ![API docs](photo/ML.png)
-
+[check this page](notebook/unsupervisedlearning/model.png).
 
 ### Dashboard Login
 
