@@ -4,6 +4,8 @@ from app.celery.worker import process_csv_task
 from app import models, schemas
 from app.api import deps
 from app.log import log
+from celery.result import AsyncResult
+from app.core.celery_app import celery_app
 
 router = APIRouter()
 
@@ -22,3 +24,10 @@ async def upload_csv(
     task = process_csv_task.delay(csv_str)
 
     return {"task_id": task.id, "status": "submitted"}
+
+
+
+
+@router.get("/task-status/{task_id}")
+def get_status(task_id: int):...
+    
