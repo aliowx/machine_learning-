@@ -26,8 +26,6 @@ async def upload_csv(
     return {"task_id": task.id, "status": "submitted"}
 
 
-
-
 @router.get("/task-status/{task_id}")
 def get_status(task_id: int):...
     
