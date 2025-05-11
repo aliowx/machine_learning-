@@ -43,7 +43,7 @@
 
 ## Local Development with Poetry:
 
-[check this page](app/README.md).
+[check this page](backend/app/README.md).
 
 ## Dockerized Deployment:
 
