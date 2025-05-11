@@ -3,7 +3,7 @@
 
 
 ## Technology Stack and Features
-- 🤖 [**MLops**](https://cloud.google.com/discover/what-is-mlops?hl=en)
+- 🤖 [**MLops**](https://cloud.google.com/discover/what-is-mlops?hl=en) for deployment and ongoing monitoring and maintenance
     - 📊 [MLflow](https://mlflow.org) for Managing the Machine Learning Lifecycle
     - 🌐 [kubeflow](https://www.kubeflow.org) for machine learning and MLOps on Kubernetes introduced by Google.
     - 📡 [Kubernetes](https://kubernetes.io) software deployment, scaling, and management
