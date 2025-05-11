@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ali/Desktop/data-analysis/notebook/supervisor%20learning/mlruns/0/05d349d447164c71ab280243df8a5171/artifacts
+end_time: 1746953362366
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 05d349d447164c71ab280243df8a5171
+run_name: bold-stag-964
+run_uuid: 05d349d447164c71ab280243df8a5171
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1746953362303
+status: 4
+tags: []
+user_id: ali

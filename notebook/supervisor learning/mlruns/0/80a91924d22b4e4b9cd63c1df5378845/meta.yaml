@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ali/Desktop/data-analysis/notebook/supervisor%20learning/mlruns/0/80a91924d22b4e4b9cd63c1df5378845/artifacts
+end_time: 1746953373767
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 80a91924d22b4e4b9cd63c1df5378845
+run_name: luminous-fish-20
+run_uuid: 80a91924d22b4e4b9cd63c1df5378845
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1746953373717
+status: 4
+tags: []
+user_id: ali
