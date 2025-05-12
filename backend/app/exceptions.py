@@ -101,7 +101,10 @@ class NotFoundException(CustomHTTPException):
     def __init__(self, detail: str | None = None, msg_code: utils.MessageCodes = None, headers: dict | None = None,):
         super().__init__(msg_code=msg_code, detail=detail, headers=headers)
 
-
+class ServiceFailure(CustomHTTPException):
+    def __init__(self, detail: str | None = None, msg_code: utils.MessageCodes = None, headers: dict | None = None,):
+        super().__init__(msg_code=msg_code, detail=detail, headers=headers)
+        
 class AlreadyExistException(CustomHTTPException):
     def __init__(self, detail: str | None = None, msg_code: utils.MessageCodes = None, headers: dict | None = None,):
         super().__init__(msg_code=msg_code, detail=detail, headers=headers)
