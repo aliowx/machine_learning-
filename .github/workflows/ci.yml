@@ -30,14 +30,5 @@ jobs:
 
       - name: 🔍 Run tests with pytest
         run: |
-          poetry run pytest
-
-      - name: 🔍 Run tests with pytest
-        run: |
-          poetry run pytest tests/
-
-      - name: 🔍 Run tests with database connection
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
+          cd backend
           poetry run pytest
