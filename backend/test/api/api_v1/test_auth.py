@@ -85,4 +85,4 @@ class TestAuth:
             f"{settings.API_V1_STR}/auth/login",
             json={"email": "invalied_email@in.valid", "password": "invalied_password"},
         )
-        assert response.status_code == 200 
+        assert response.status_code == 404 
