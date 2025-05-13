@@ -1,26 +1,43 @@
-name: CI/CD for Backend
+name: CI 
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: ✅ Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@v1.0.0
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_KEY }}
-          script: |
-            cd /home/ubuntu/projects/data-analysis
-            git pull origin main
-            docker compose down
-            docker compose up -d --build
+          python-version: '3.10'
+
+      - name: 📦 Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: 📂 Install dependencies
+        run: |
+          poetry install
+
+      - name: 🔍 Run tests with pytest
+        run: |
+          poetry run pytest
+
+      - name: 🔍 Run tests with pytest
+        run: |
+          poetry run pytest tests/
+
+      - name: 🔍 Run tests with database connection
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          poetry run pytest
