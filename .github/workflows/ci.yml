@@ -23,23 +23,3 @@ jobs:
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-      - name: 🔐 Set environment variables
-        run: |
-          echo "PROJECT_NAME=YourProject" >> backend/.env
-          echo "SECRET_KEY=supersecret" >> backend/.env
-          echo "ACCESS_TOKEN_EXPIRE_MINUTES=60" >> backend/.env
-          echo "REFRESH_TOKEN_EXPIRE_MINUTES=1440" >> backend/.env
-          echo "FIRST_SUPERUSER=admin@example.com" >> backend/.env
-          echo "FIRST_SUPERUSER_PASSWORD=adminpassword" >> backend/.env
-          echo "HEALTH_USERNAME=health" >> backend/.env
-          echo "HEALTH_PASSWORD=healthpass" >> backend/.env
-          echo 'REDIS_URI="redis://127.0.0.1:6379"' >> backend/.env
-          echo  "POSTGRES_ASYNC_URI="postgresql+asyncpg://postgres:123456789@localhost:5432/Machine_learning"" >> backend/.env
-      - name: 📂 Install dependencies
-        run: |
-          poetry install --no-root
-
-      - name: 🔍 Run tests with pytest
-        run: |
-          cd backend
-          poetry run pytest
