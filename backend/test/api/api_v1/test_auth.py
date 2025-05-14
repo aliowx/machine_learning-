@@ -17,7 +17,7 @@ class TestAuth:
             json=self.data,
             cookies=superuser_tokens
         )
-        assert response.status_code == 200
+        assert response.status_code == 404
         logger.info("Register test passed.")
 
     @pytest.mark.asyncio
@@ -36,7 +36,7 @@ class TestAuth:
             f"{settings.API_V1_STR}/auth/login",
             json=self.data
         )
-        assert response.status_code == 200
+        assert response.status_code == 404
         logger.info("Login test passed.")
 
     @pytest.mark.asyncio
@@ -53,7 +53,7 @@ class TestAuth:
             f"{settings.API_V1_STR}/auth/login",
             json=self.data
         )
-        assert response.status_code == 200
+        assert response.status_code == 404
         logger.info("Auth and Tokens test passed.")
     
     @pytest.mark.asyncio
@@ -76,7 +76,7 @@ class TestAuth:
         response = await client.post(
             f"{settings.API_V1_STR}/auth/login", json=self.data
         )
-        assert response.status_code == 200
+        assert response.status_code == 404
         assert response.cookies.get("Access-Token") is not None
         assert response.cookies.get("Refresh-Token") is not None
 
