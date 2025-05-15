@@ -1,20 +1,20 @@
-FROM python:3.9-slim-buster
+FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
+RUN apt-get update && apt-get install -y build-essential curl
 
-RUN pip install --no-cache-dir poetry
+COPY pyproject.toml poetry.lock* /app/
 
+RUN pip install poetry \
+ && poetry config virtualenvs.create false \
+ && poetry install --no-root --no-interaction --no-ansi
 
-RUN poetry config virtualenvs.create false
+COPY /app/
 
-RUN poetry install --no-root --without dev
+RUN useradd -m -d /home/dockeruser -s /bin/bash dockeruser \
+ && chown -R dockeruser:dockeruser /app/
 
-COPY . .
+USER dockeruser
 
-
-EXPOSE 8000
-
-
-CMD ["poetry", "run", "python", "main.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
