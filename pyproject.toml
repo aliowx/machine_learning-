@@ -38,6 +38,8 @@ tenacity = "^9.1.2"
 celery = "^5.5.2"
 python-multipart = "^0.0.20"
 mlflow = "^2.22.0"
+tensorflow = "^2.19.0"
+mne = "^1.9.0"
 
 
 [tool.poetry.group.dev.dependencies]
