@@ -1536,6 +1536,25 @@ test = ["flufl.flake8", "importlib_resources (>=1.3)", "jaraco.test (>=5.4)", "p
 type = ["pytest-mypy"]
 
 [[package]]
+name = "importlib-resources"
+version = "6.5.2"
+description = "Read resources from Python packages"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "importlib_resources-6.5.2-py3-none-any.whl", hash = "sha256:789cfdc3ed28c78b67a06acb8126751ced69a3d5f79c095a98298cd8a760ccec"},
+    {file = "importlib_resources-6.5.2.tar.gz", hash = "sha256:185f87adef5bcc288449d98fb4fba07cea78bc036455dd44c5fc4a2fe78fed2c"},
+]
+
+[package.extras]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1)"]
+cover = ["pytest-cov"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
+enabler = ["pytest-enabler (>=2.2)"]
+test = ["jaraco.test (>=5.4)", "pytest (>=6,!=8.1.*)", "zipp (>=3.17)"]
+type = ["pytest-mypy"]
+
+[[package]]
 name = "iniconfig"
 version = "2.1.0"
 description = "brain-dead simple config-ini parsing"
@@ -4059,6 +4078,31 @@ develop = ["colorama", "cython (>=3.0.10)", "cython (>=3.0.10,<4)", "flake8", "i
 docs = ["ipykernel", "jupyter-client", "matplotlib", "nbconvert", "nbformat", "numpydoc", "pandas-datareader", "sphinx"]
 
 [[package]]
+name = "sweetviz"
+version = "2.3.1"
+description = "A pandas-based library to visualize and compare datasets."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "sweetviz-2.3.1-py3-none-any.whl", hash = "sha256:9ac785dd78f8555f6d57a2e4fee3853e6c5ace9706de19f30697c409ff9de429"},
+    {file = "sweetviz-2.3.1.tar.gz", hash = "sha256:076bcab57835db167789e68949340f074dee2da78a24eaaaf211d2735f38b691"},
+]
+
+[package.dependencies]
+importlib-resources = ">=1.2.0"
+jinja2 = ">=2.11.1"
+matplotlib = ">=3.1.3"
+numpy = ">=1.16.0"
+pandas = ">=0.25.3,<1.0.0 || >1.0.0,<1.0.1 || >1.0.1,<1.0.2 || >1.0.2"
+scipy = ">=1.3.2"
+tqdm = ">=4.43.0"
+
+[package.extras]
+dev = ["pytest (>=6)", "pytest-cov (>=3)"]
+docs = ["furo", "myst-parser (>=0.13)", "sphinx (>=4.0)", "sphinx-autodoc-typehints", "sphinx-book-theme (>=0.1.0)", "sphinx-copybutton"]
+test = ["pytest (>=6)", "pytest-cov (>=3)"]
+
+[[package]]
 name = "tenacity"
 version = "9.1.2"
 description = "Retry code until it succeeds"
@@ -4488,4 +4532,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "22d570d25c62f922362a37b9b5faefe87ee22d09c59f11d7f9fc6c7c59fea230"
+content-hash = "db028b678e58c56c65ba212203271591e1ebc3ce97aee4cc5b92a7ecd9f32375"
