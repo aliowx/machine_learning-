@@ -1,0 +1,15 @@
+artifact_uri: /home/ali/Desktop/data-analysis/notebook/EEG/mlruns/177390709196704933/8c3650b473fe4b78bedb0659586dc7e7/artifacts
+end_time: 1747551430055
+entry_point_name: ''
+experiment_id: '177390709196704933'
+lifecycle_stage: active
+run_id: 8c3650b473fe4b78bedb0659586dc7e7
+run_name: fun-hare-174
+run_uuid: 8c3650b473fe4b78bedb0659586dc7e7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747551429795
+status: 4
+tags: []
+user_id: ali

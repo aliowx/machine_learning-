@@ -1,0 +1,15 @@
+artifact_uri: /home/ali/Desktop/data-analysis/notebook/EEG/mlruns/177390709196704933/67390d4f0acd45ddbd073a92c1a26698/artifacts
+end_time: 1747551472986
+entry_point_name: ''
+experiment_id: '177390709196704933'
+lifecycle_stage: active
+run_id: 67390d4f0acd45ddbd073a92c1a26698
+run_name: placid-grouse-920
+run_uuid: 67390d4f0acd45ddbd073a92c1a26698
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747551472742
+status: 4
+tags: []
+user_id: ali
