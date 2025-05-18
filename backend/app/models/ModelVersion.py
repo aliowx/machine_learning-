@@ -13,7 +13,7 @@ from sqlalchemy import (
 
 
 
-class MLModel(Base):
+class ModelVersion(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     model_name : Mapped[str] = mapped_column(String)
