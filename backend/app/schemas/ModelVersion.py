@@ -16,8 +16,26 @@ class OutputSchema(BaseModel):
     constraints: Optional[Dict[str, Any]] = None
 
 
+class MLModelBase(BaseModel):
+    id: int = None
+    model_name: str = None
+    version: str = None
+    model_file_path: str = None
+    description: str = None
+    
+    @field_validator('Model')
+    def validate_model(cls, v)-> None:
+        if v and v.lower() not in ["scikit-learn", "tensorflow", "pytorch", "xgboost", "lightgbm"]:
+            raise ValueError("Unsupported the Model")
+        return  v
 
-
+    
+    @field_validator('Task')
+    def validate_task(cls, v):
+        if v and v.lower() not in ["classification", "regression", "clustering", "nlp", "other"]:
+            raise ValueError("Unsupported task type")
+        return v
+    
 class ModelVersionBase(BaseModel):
     id: int | None = None
     version_name: str | None = None
