@@ -44,6 +44,19 @@ class ModelVersionBase(BaseModel):
     
 
 
+class MLModelCreate(MLModelBase):
+    model_name: str  
+    version: str  
+    model_file_path: str  
+    framework: str  
+    task: str
+    
+    class Config:
+        orm_mode = False
+        
+        
+        
+ 
 class ModelVersionCreate(ModelVersionBase):...
 
 
