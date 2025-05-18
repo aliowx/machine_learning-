@@ -15,5 +15,5 @@ from app import exceptions as exc
 router = APIRouter()
 namespace = "predict"
 
-# @router.post('')
-# async def M
+@router.post('/')
+async def predict() -> None:...
