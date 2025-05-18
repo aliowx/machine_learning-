@@ -24,7 +24,7 @@ class MLModelBase(BaseModel):
     description: str = None
     
     @field_validator('Model')
-    def validate_model(cls, v)-> None:
+    def validate_model(cls, v):
         if v and v.lower() not in ["scikit-learn", "tensorflow", "pytorch", "xgboost", "lightgbm"]:
             raise ValueError("Unsupported the Model")
         return  v
