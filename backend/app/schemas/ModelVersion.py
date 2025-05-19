@@ -6,7 +6,7 @@ from datetime import datetime
 class InputSchema(BaseModel):
     name: str
     type: str
-    description: Optional[str] = None
+    description: Optional[str] = None   
     constraints: Optional[Dict[str, Any]] = None
 
 class OutputSchema(BaseModel):
@@ -23,18 +23,18 @@ class MLModelBase(BaseModel):
     model_file_path: str = None
     description: str = None
     
-    @field_validator('Model')
-    def validate_model(cls, v):
-        if v and v.lower() not in ["scikit-learn", "tensorflow", "pytorch", "xgboost", "lightgbm"]:
-            raise ValueError("Unsupported the Model")
-        return  v
+    # @field_validator('Model')
+    # def validate_model(cls, v):
+    #     if v and v.lower() not in ["scikit-learn", "tensorflow", "pytorch", "xgboost", "lightgbm"]:
+    #         raise ValueError("Unsupported the Model")
+    #     return  v
 
     
-    @field_validator('Task')
-    def validate_task(cls, v):
-        if v and v.lower() not in ["classification", "regression", "clustering", "nlp", "other"]:
-            raise ValueError("Unsupported task type")
-        return v
+    # @field_validator('Task')
+    # def validate_task(cls, v):
+    #     if v and v.lower() not in ["classification", "regression", "clustering", "nlp", "other"]:
+    #         raise ValueError("Unsupported task type")
+    #     return v
     
 class ModelVersionBase(BaseModel):
     id: int | None = None
@@ -64,4 +64,4 @@ class ModelVersionCreate(ModelVersionBase):...
 class ModelVersionUpdate(ModelVersionBase):...
 
 
-class ModelVersionInDBBase():...
+class ModelVersionInDBBase():...    
