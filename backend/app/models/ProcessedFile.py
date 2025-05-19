@@ -14,11 +14,11 @@ from datetime import datetime, UTC
 
 class ProcessedFile(Base):
     
-    task_id:Mapped[str]= mapped_column(String, primary_key=True)
-    result:Mapped[JSON] = mapped_column(JSON, nullable=True)  # JSON result
+    task_id: Mapped[str]= mapped_column(String, primary_key=True)
+    result: Mapped[JSON] = mapped_column(JSON)  # JSON result
     
-    status:Mapped[str] = mapped_column(String, default="PENDING")  # PENDING, SUCCESS, FAILED
-    error_message:Mapped[str] = mapped_column(String, nullable=True)
+    status: Mapped[str] = mapped_column(String, default="PENDING")  # PENDING, SUCCESS, FAILED
+    error_message: Mapped[str] = mapped_column(String, nullable=True)
     
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now(UTC))
     completed_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
