@@ -37,6 +37,7 @@ def test(word: str)->str:
     name="process_csv_task",
 )
 def process_csv_task(self, csv_content: str):
+    print('Martin here!')
     try:
         df = pd.read_csv(io.StringIO(csv_content))
 
