@@ -6,6 +6,8 @@ from app.api import deps
 from app.log import log
 from celery.result import AsyncResult
 from app.core.celery_app import celery_app
+import io 
+
 
 router = APIRouter()
 
@@ -17,11 +19,13 @@ async def upload_csv(
 ):
     if not file.filename.endswith(".csv"):
         raise HTTPException(status_code=400, detail="File must be a CSV")
-
-    contents = await file.read()
-    csv_str = contents.decode("utf-8")
-
-    task = process_csv_task.delay(csv_str)
+    try:
+        contents = await file.read()
+        csv_content = contents.decode("utf-8")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Error reading file: {str(e)}")
+    
+    task = celery_app.send_task("process_csv_task", args=[csv_content])
 
     return {"task_id": task.id, "status": "submitted"}
 
