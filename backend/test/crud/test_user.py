@@ -20,3 +20,6 @@ class TestUser:
         user = await crud.user.create(db, obj_in=user_in)
         assert user.email == email
         assert hasattr(user, "hashed_password")
+        
+    @pytest.mark.asyncio
+    async def test_user_create_duplicate(self, db: AsyncSession)->UserCreate:...
