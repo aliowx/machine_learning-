@@ -58,7 +58,7 @@ Create an **.env** file on root folder and copy the content from **.env.example*
 - When you want to build the project you should use this file to have dockerized postgres and redis attached to the project.
 - To build and run PostgreSQL and Redis should use this command: 
 ```dockerfile
-docker-compose -f docker-compose-dev.yml up -d --build 
+docker-compose --build 
 ```
 #### Hint:
 If you get some errors like 'port already in use' for postgres or redis you can change the external port.
