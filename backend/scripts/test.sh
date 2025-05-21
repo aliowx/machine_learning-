@@ -1,4 +1,4 @@
 #!/bin/sh -e
 set -x
 
-CACHING=false python -m pytest ./app/app
+CACHING=false python -m pytest ./backend
