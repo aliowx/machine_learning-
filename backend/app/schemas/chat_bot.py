@@ -11,6 +11,15 @@ class ChatbotBase(BaseModel):
 class ChatbotCreate(ChatbotBase):...
 
 
+class ChatRequest(BaseModel):
+    message: str
+    user_id: Optional[str] = None
+
+
+class ChatResponse(BaseModel):
+    response: str
+    user_id: Optional[str] = None
+
 class ChatbotUpdate(ChatbotBase):
     message: Optional[str] = None
     web_service_url: Optional[HttpUrl] = None
