@@ -170,6 +170,13 @@ def health_user(
 
     return credentials.username
 
+def get_api_key():
+    if not settings.CHATBOT_API_KEY:
+        raise exc.HTTPException(
+            status_code=404,
+            detail="There isn't Any API key"
+        )
+    return settings.CHATBOT_API_KEY
 
 
 async def get_current_user_from_basic(
