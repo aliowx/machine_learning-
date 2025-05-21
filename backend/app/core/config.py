@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     HEALTH_PASSWORD: str
     COMMIT_ID: str | None = None
     APP_VERSION: str | None = None
-
+    CHATBOT_API_KEY: str | None = None
     @classmethod
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     def assemble_cors_origins(cls, v: str | list[str]) -> list[str]:
