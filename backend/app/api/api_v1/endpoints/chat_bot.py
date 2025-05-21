@@ -16,5 +16,3 @@ namespace = "ChatBot"
 @router.get('/bot')
 # @cache()
 async def chat_bot():...
-
-
