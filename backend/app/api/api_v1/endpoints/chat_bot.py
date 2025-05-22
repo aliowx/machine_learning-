@@ -16,7 +16,7 @@ router = APIRouter()
 namespace = "ChatBot"
 
 
-@router.get('/bot')
+@router.post('/bot')
 # @cache()
 async def chatbot_process_message(
     request: ChatRequest,
