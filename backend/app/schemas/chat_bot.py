@@ -13,7 +13,7 @@ class ChatbotCreate(ChatbotBase):...
 
 class ChatRequest(BaseModel):
     message: str
-    user_id: Optional[str] = None
+    user_id: Optional[int] = None
 
 
 class ChatResponse(BaseModel):
