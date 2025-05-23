@@ -4,7 +4,6 @@ from datetime import datetime
 
 class ChatbotBase(BaseModel):
     message: str
-    web_service_url: Optional[str] = None
     
     
     
