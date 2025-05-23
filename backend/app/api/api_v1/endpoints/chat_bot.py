@@ -1,5 +1,4 @@
-from fastapi import FastAPI ,Request, HTTPException, APIRouter, Depends
-from fastapi.openapi.models import OpenAPI
+from fastapi import APIRouter, Depends, HTTPException 
 from app.core.config import settings
 from app.log import log
 from app.cache import invalidate, cache
@@ -16,22 +15,29 @@ router = APIRouter()
 namespace = "ChatBot"
 
 
+def get_bot_response(user_message: str)-> str:
+    user_message = user_message.lower()
+    if "Hi" in user_message:
+        return "how can i help ypu my dear!?"
+    elif "By" in user_message:
+        return "good by  😊"
+    else:
+        return "Opss"
+
+
+chat_history: list[dict] = []
+
 @router.post('/bot')
-# @cache()
 async def chatbot_process_message(
-    request: ChatRequest,
-    api_key: str = Depends(deps.get_api_key), 
+    message: ChatbotBase,
    _: models.User = Depends(deps.get_current_superuser_from_cookie_or_basic),
-)-> ChatbotBase :
-    try:
-        log.info(f"[{namespace}] Received message from user_id={request.user_id}: {request.message}")
-        async with httpx.AsyncClient as client:
-            response = await client.post(
-                settings.CHATBOT_API_KEY,
-                headers={"Authorization": f"Bearer {api_key}"},
-                json={"message": request.message, "user_id": request.user_id},
-                timeout=10.0
-            )
-            
-    except:
-        pass 
+) :
+    if not message.message:
+            raise HTTPException(status_code=400, detail="")
+
+    bot_response = get_bot_response(message.message)
+    
+
+    chat_history.append({"user": message.message, "bot": bot_response})
+    
+    return {"user_message": message.message, "bot_response": bot_response}
