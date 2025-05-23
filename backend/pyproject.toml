@@ -39,6 +39,7 @@ celery = "^5.5.2"
 python-multipart = "^0.0.20"
 mlflow = "^2.22.0"
 flower = "^2.0.1"
+aiohttp = "^3.11.18"
 
 
 [tool.poetry.group.dev.dependencies]
