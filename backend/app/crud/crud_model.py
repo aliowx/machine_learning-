@@ -5,7 +5,6 @@ from sqlalchemy import and_, select
 from app.schemas import MLModelCreate, MLModelBase
 from app.crud.base import CRUDBase
 from app.models import ModelVersion
-import json
 
 
 class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
