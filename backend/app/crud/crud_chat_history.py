@@ -10,7 +10,7 @@ from app.schemas.chat_bot import ChatbotCreate, ChatbotUpdate
 
 
 class CRUDChatBot(CRUDBase[ChatHistory, ChatbotCreate, ChatbotUpdate]):
-    async def create_chat_message(db: AsyncSession, chat: ChatbotCreate, bot_response: str )-> ChatHistory:
+    async def create_chat_message(self, db: AsyncSession, chat: ChatbotCreate, bot_response: str )-> ChatHistory:
         try:
             chat_data = jsonable_encoder(chat)
             
@@ -31,3 +31,7 @@ class CRUDChatBot(CRUDBase[ChatHistory, ChatbotCreate, ChatbotUpdate]):
         
         
         
+    async def get_user_chat_history(
+        self,
+        db: AsyncSession
+    ):...
