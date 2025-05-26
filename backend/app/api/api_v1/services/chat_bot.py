@@ -75,13 +75,39 @@ class ChatbotService:
                 created_at=bot_chat.created_at
             )
 
-        except exc.BaseCustomException as e:
+        except exc.NotFoundException as e:
             logger.error("Custom exception: %s, Code: %s", e.detail, e.msg_code)
             raise
         except Exception as e:
             logger.error("Unexpected error: %s", str(e), exc_info=True)
-            raise exc.ServiceException(
+            raise exc.NotFoundException(
                 detail="Internal error processing message",
                 msg_code=MessageCodes.internal_error
             )
 
+    async def _generate_response(self, message: str, conversation_id: Optional[int]) -> str:
+
+        try:
+            async with self.http_session.post(
+                "https://api.x.ai/v1/chat/completions",
+                json={
+                    "message": message,
+                    "conversation_id": conversation_id
+                },
+                timeout=10
+            ) as response:
+                if response.status != 200:
+                    logger.error("AI API failed with status: %d", response.status)
+                    raise exc.NotFoundException(
+                        detail=f"AI service error: {response.status}",
+                        msg_code=MessageCodes.bad_request
+                    )
+                data = await response.json()
+                return data.get("response", "Sorry, I couldn't respond.")
+
+        except aiohttp.ClientError as e:
+            logger.error("AI API connection error: %s", str(e))
+            raise exc.NotFoundException(
+                detail="Failed to connect to AI service",
+                msg_code=MessageCodes.internal_error
+            )
