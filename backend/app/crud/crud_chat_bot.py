@@ -7,7 +7,7 @@ from app.db.base_class import Base
 from app.models.chat_bot import ChatHistory
 from app.schemas.chat_bot import ChatbotCreate, ChatbotUpdate, Chatbot
 from typing import Optional, List
-import exceptions as exc
+import app.exceptions as exc
 from app.utils import MessageCodes
 import logging
 
