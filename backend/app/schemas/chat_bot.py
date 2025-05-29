@@ -9,6 +9,7 @@ class ChatbotCreate(Chatbot):
     conversation_id: int
     is_bot: bool = False 
 
+class ChatbotBase(Chatbot):...
 class ChatbotResponse(Chatbot):
     id: int
     message: str
