@@ -30,5 +30,24 @@ class CRUDChatBot(CRUDBase[ChatHistory, ChatbotCreate, ChatbotUpdate]):
             raise Exception(f"Error creating chat message: {str(e)}")
         
 
-
+    
+    async def get_messages_by_conversation_id(
+        self,
+        db: AsyncSession,
+        conversation_id: int,
+        limit: int = 10,
+        offset: int = 0,
+    )-> list[Chatbot]:
+        try:
+            query = select(self.model).where(
+                and_(
+                    self.model.user_id == conversation_id,
+                    self.model.is_deleted.is_(None)
+                )
+            )
+            response = await db.execute(query)
+            return response.scalar_one_or_none()
+        
+        except:
+            pass
 chat = CRUDChatBot(ChatHistory)
