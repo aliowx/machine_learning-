@@ -4,10 +4,10 @@ from datetime import datetime
 
 class Chatbot(BaseModel):
     message: str
-    
-    
-    
-class ChatbotCreate(Chatbot):...
+
+class ChatbotCreate(Chatbot):
+    conversation_id: int
+    is_bot: bool = False 
 
 class ChatbotResponse(Chatbot):
     id: int
@@ -16,17 +16,17 @@ class ChatbotResponse(Chatbot):
     is_bot: bool
     created_at: datetime
     bot_response: str
-    
+
     class Config:
         from_attributes = True
 
 class ChatRequest(BaseModel):
     message: str
+    conversation_id: int
     user_id: Optional[int] = None
-
 
 class ChatbotUpdate(Chatbot):
     message: Optional[str] = None
-    web_service_url: Optional[HttpUrl] = None
-    metadata: Optional[Dict[str, Any]] = None
-    created_at: Optional[datetime] = None
+    conversation_id: Optional[int] = None
+    is_bot: Optional[bool] = None
+    bot_response: Optional[str] = None
