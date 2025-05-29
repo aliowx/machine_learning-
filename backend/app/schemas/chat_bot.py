@@ -9,7 +9,16 @@ class Chatbot(BaseModel):
     
 class ChatbotCreate(Chatbot):...
 
-class ChatbotResponse(Chatbot):...
+class ChatbotResponse(Chatbot):
+    id: int
+    message: str
+    conversation_id: int
+    is_bot: bool
+    created_at: datetime
+    bot_response: str
+    
+    class Config:
+        from_attributes = True
 
 class ChatRequest(BaseModel):
     message: str
