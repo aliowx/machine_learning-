@@ -115,5 +115,19 @@ class ChatbotService:
         self,
         db: AsyncSession,
         conversation_id: int,
-        limit:None
-    ):...
+        limit: int = 10,
+        offset: int = 0
+    )-> List[ChatbotResponse]:
+        messages = await crud.chat.get_messages_by_conversation_id(
+            db=db,
+            conversation_id=conversation_id,
+            limit=limit,
+            offset=offset
+        )
+        if not messages:
+            raise exc.NotFoundException(
+                detail='Messages not found',
+                msg_code=MessageCodes.not_found
+            )
+        return messages
+        
