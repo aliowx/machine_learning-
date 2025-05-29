@@ -111,3 +111,9 @@ class ChatbotService:
                 detail="Failed to connect to AI service",
                 msg_code=MessageCodes.internal_error
             )
+    async def get_conversation_history(
+        self,
+        db: AsyncSession,
+        conversation_id: int,
+        limit:None
+    ):...
