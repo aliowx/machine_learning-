@@ -63,5 +63,40 @@ class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
             
             
             
-    async def get_model_versions(self, db: AsyncSession,model_id: int, limit: int = 100) -> list[dict]:...        
+    async def get_model_versions(self, db: AsyncSession, model_id: int, limit: int = 100) -> list[dict]:
+        """
+        Retrieve all versions of a machine learning model with pagination.
         
+        Args:
+            model_id (int): The ID of the machine learning model.
+            db (AsyncSession): The async database session.
+            limit (int): Maximum number of versions to return (default: 100).
+        
+        Returns:
+            list[dict]: A list of model version data in dictionary format.
+        """
+        
+        try:
+            query = select(
+                ModelVersion
+            ).filter
+            (
+                ModelVersion.id == model_id   
+            ).limit(
+                limit
+            )
+            
+            result =  await db.execute(query)
+            model_versions = result.scalars().all()
+            
+            
+            if not model_versions:
+                logger.info(f"No versions found for model_id={model_id}")
+                return []
+            
+            
+            return [jsonable_encoder(version) for version in model_versions]
+
+        except Exception as e:
+            logger.exception(f"Error retrieving model versions for model_id={model_id}: {str(e)}")
+            raise
