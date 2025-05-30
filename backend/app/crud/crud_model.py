@@ -82,8 +82,6 @@ class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
             ).filter
             (
                 ModelVersion.id == model_id   
-            ).limit(
-                limit
             )
             
             result =  await db.execute(query)
