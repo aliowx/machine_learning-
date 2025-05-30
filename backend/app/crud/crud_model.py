@@ -48,12 +48,17 @@ class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
                 except json.JSONDecodeError as e:
                     logger.error(f"Failed to parse JSON outputs for model_id={model_id}, version={version}: {str(e)}")
                     raise ValueError(f"Invalid JSON data in outputs: {str(e)}")
-                
+            
             else:
                 output_data = outputs
                 
-                
-        except:
-            pass
-        
+            if not isinstance(output_data, dict):
+                logger.error(f"Output data is not a dictionary for model_id={model_id}, version={version}")    
+                raise ValueError('Output data must be a dictionary')
+
+
+            return output_data        
+        except Exception as e:
+            logger.exception(f'Error retrieving output for model_id={model_id}, version={version}: {str(e)}')
+                    
         
