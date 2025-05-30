@@ -11,7 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
-    async def get_output_model(self, outputs: str, db: AsyncSession) -> Optional[dict]:
+    async def get_output_model(self, outputs: str, db: AsyncSession, model_id: int, version :str) -> Optional[dict]:
         """
         Retrieve and parse the output of a specific model version from the database.
         
@@ -27,12 +27,32 @@ class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
             ValueError: If the output data is not valid JSON.
         """
         try:
-            output_data = json.loads(outputs) if isinstance(output_data, str) else output_data
+            query = select(ModelVersion).filter(
+                ModelVersion.model_id == model_id,
+                ModelVersion.version == version
+            )
+            result = await db.execute(query)
+            model_version = result.scalars().first()
+
+            if not model_version:
+                logger.warning(f"No model version found for model_id={model_id}, version={version}")
+                return None
             
-            if not isinstance(output_data, dict):
-                raise ValueError("There is problem here about the json data")
-            
-            
+            outputs = model_version.outputs
+            if not outputs:
+                logger.info(f"No outputs found for model_id={model_id}, version={version}")
+                return None
+            if isinstance(outputs, str):
+                try:
+                    output_data = json.loads(outputs)
+                except json.JSONDecodeError as e:
+                    logger.error(f"Failed to parse JSON outputs for model_id={model_id}, version={version}: {str(e)}")
+                    raise ValueError(f"Invalid JSON data in outputs: {str(e)}")
+                
+            else:
+                output_data = outputs
+                
+                
         except:
             pass
         
