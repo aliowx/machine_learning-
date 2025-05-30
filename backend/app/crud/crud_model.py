@@ -60,5 +60,8 @@ class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
             return output_data        
         except Exception as e:
             logger.exception(f'Error retrieving output for model_id={model_id}, version={version}: {str(e)}')
-                    
+            
+            
+            
+    async def get_model_versions(self, db: AsyncSession,model_id: int, limit: int = 100) -> list[dict]:...        
         
