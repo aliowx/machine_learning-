@@ -98,3 +98,8 @@ class CRUDModel(CRUDBase[ModelVersion, MLModelCreate, MLModelBase]):
         except Exception as e:
             logger.exception(f"Error retrieving model versions for model_id={model_id}: {str(e)}")
             raise
+        
+    async def get_latest_version(self, db: AsyncSession, model_id: int) -> Optional[ModelVersion]:
+        query = select(ModelVersion).filter(ModelVersion.model_id == model_id).order_by(ModelVersion.created_at.desc()).limit(1)
+        result = await db.execute(query)
+        return result.scalars().first()
