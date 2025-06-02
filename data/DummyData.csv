@@ -1,0 +1,6 @@
+sex,age,educational_status,partner_status,employment_status,weight,height,BMI,treatment,EMI,EAP,EPTCA,ECABG,ECVA_TIA,riskfactor_familyhistory,riskfactor_DM,riskfactor_hypertension,riskfactor_dyslipidemia,riskfactor_smoking,acetylsalicylic_acid,cholesterol_lowering_med,ACE_inhibitor,calcium_blocker,beta_blocker,thienopyridine,oral_anticoagulant,nitrate,diuretic,psychotropic,angiotensin2_receptor_blocker,week,steps,mvpa_mins,perception,steps_goal,mvpa_mins_goal
+1,25,1,0,1,65,177,20.75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,58,0,0,191,0
+1,25,1,0,1,65,177,20.75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,191,0,0,0,0
+1,25,1,0,1,65,177,20.75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,,
+0,31,2,1,1,64,172,21.63,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,20000,500,10,20000,500
+0,31,2,1,1,64,172,21.63,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,20000,500,2,20000,500
